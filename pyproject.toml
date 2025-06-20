@@ -6,8 +6,11 @@ readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
     "matplotlib>=3.10.3",
-    "networkx>=3.5",
     "scikit-fuzzy>=0.5.0",
     "scipy>=1.15.3",
-    "streamlit>=1.46.0",
+]
+
+[dependency-groups]
+dev = [
+    "ipykernel>=6.29.5",
 ]
