@@ -1,7 +1,7 @@
 [project]
-name = "fuzzy-lab2"
+name = "fuzzy"
 version = "0.1.0"
-description = "Add your description here"
+description = "fuzzy logic stuff for lab 1, 2, and appliance fuzzy controller"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
