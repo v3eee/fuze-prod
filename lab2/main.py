@@ -160,16 +160,16 @@ def main():
     
     target_temp = st.sidebar.slider(
         "Target Temperature (°F)",
-        min_value=60.0,
-        max_value=90.0,
+        min_value=-0.0,
+        max_value=100.0,
         value=72.0,
         step=0.5
     )
     
     room_temp = st.sidebar.slider(
         "Current Room Temperature (°F)",
-        min_value=60.0,
-        max_value=90.0,
+        min_value=-100.0,
+        max_value=100.0,
         value=75.0,
         step=0.5
     )
@@ -192,7 +192,7 @@ def main():
         cooling_output = 0.0
     
     # Display current status
-    col1, col2, col3, col4 = st.columns(4)
+    col1, col2, col3, col4, col5 = st.columns(5)
     
     with col1:
         st.metric("Target Temperature", f"{target_temp:.1f}°F")
@@ -203,8 +203,11 @@ def main():
     with col3:
         delta_color = "inverse" if current_error > 0 else "normal"
         st.metric("Temperature Error", f"{current_error:.1f}°F", delta=f"{current_error:.1f}°F")
-    
+
     with col4:
+        st.metric("Error Rate", f"{current_error_dot:.1f}°F/min")
+    
+    with col5:
         cooling_status = "ON" if cooling_output > 0.5 else "OFF"
         st.metric("Cooling Status", cooling_status, f"{cooling_output:.1%}")
     
