@@ -35,24 +35,13 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           configuration: changelog-config.json
 
-      - name: Create Release and Upload lab1.zip
+      - name: Create Release and Upload All Zips
         uses: softprops/action-gh-release@v2
         with:
-          files: lab1.zip
+          files: |
+            lab1.zip
+            lab2.zip
+            microwave.zip
           body: ${{ steps.build_changelog.outputs.changelog }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Upload lab2.zip to Release
-        uses: softprops/action-gh-release@v2
-        with:
-          files: lab2.zip
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Upload microwave.zip to Release
-        uses: softprops/action-gh-release@v2
-        with:
-          files: microwave.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
