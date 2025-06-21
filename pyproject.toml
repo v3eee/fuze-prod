@@ -7,8 +7,12 @@ requires-python = ">=3.13"
 dependencies = [
     "matplotlib>=3.10.3",
     "networkx>=3.5",
+    "numpy>=2.3.0",
+    "pandas>=2.3.0",
+    "plotly>=6.1.2",
     "scikit-fuzzy>=0.5.0",
     "scipy>=1.15.3",
+    "streamlit>=1.46.0",
 ]
 
 [dependency-groups]
