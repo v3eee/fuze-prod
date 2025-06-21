@@ -1,0 +1,10 @@
+{
+  "ignore_labels": ["ignore"],
+  "label_extractor": [
+    {
+      "pattern": "\\[skip\\]",
+      "on_property": "title",
+      "method": "match"
+    }
+  ]
+}
