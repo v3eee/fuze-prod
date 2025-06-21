@@ -1,12 +1,16 @@
-name: Zip and Release Folders
+name: Zip, Changelog, and Release Folders
 
 on:
   push:
     tags:
       - 'v*.*.*'
 
+permissions:
+  contents: write
+  pull-requests: read
+
 jobs:
-  zip-and-release:
+  zip-changelog-release:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -24,23 +28,20 @@ jobs:
       - name: Zip microwave
         run: zip -r microwave.zip microwave
 
-      - name: Create Release and Upload lab1.zip
-        uses: softprops/action-gh-release@v2
+      - name: Build Changelog
+        id: build_changelog
+        uses: mikepenz/release-changelog-builder-action@v5
         with:
-          files: lab1.zip
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          configuration: changelog-config.json
 
-      - name: Upload lab2.zip to Release
+      - name: Create Release and Upload All Zips
         uses: softprops/action-gh-release@v2
         with:
-          files: lab2.zip
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Upload microwave.zip to Release
-        uses: softprops/action-gh-release@v2
-        with:
-          files: microwave.zip
+          files: |
+            lab1.zip
+            lab2.zip
+            microwave.zip
+          body: ${{ steps.build_changelog.outputs.changelog }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
