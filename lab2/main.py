@@ -160,7 +160,7 @@ def main():
     
     target_temp = st.sidebar.slider(
         "Target Temperature (°F)",
-        min_value=-0.0,
+        min_value=-100.0,
         max_value=100.0,
         value=72.0,
         step=0.5
