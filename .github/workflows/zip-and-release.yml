@@ -1,0 +1,46 @@
+name: Zip and Release Folders
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+jobs:
+  zip-and-release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up zip
+        run: sudo apt-get install -y zip
+
+      - name: Zip lab1
+        run: zip -r lab1.zip lab1
+
+      - name: Zip lab2
+        run: zip -r lab2.zip lab2
+
+      - name: Zip microwave
+        run: zip -r microwave.zip microwave
+
+      - name: Create Release and Upload lab1.zip
+        uses: softprops/action-gh-release@v2
+        with:
+          files: lab1.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload lab2.zip to Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: lab2.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload microwave.zip to Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: microwave.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
